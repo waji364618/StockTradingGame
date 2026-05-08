@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+
+<VBox spacing="10"
+      prefHeight="550" prefWidth="420"
+      xmlns="http://javafx.com/javafx/25"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="stockgame.presentation.controllers.PortfolioController">
+
+    <padding>
+        <Insets top="14" bottom="14" left="14" right="14"/>
+    </padding>
+
+    <Button text="Tilbage" onAction="#goBack"/>
+
+    <Label fx:id="balanceLabel" text="Balance: 0 kr."
+           style="-fx-font-size: 14px;"/>
+
+    <Label text="Dine aktier:"
+           style="-fx-text-fill: gray;"/>
+
+    <TableView fx:id="ownedStockTable" prefHeight="180">
+        <columns>
+            <TableColumn fx:id="ownedSymbolCol"
+                         text="Symbol" prefWidth="100"/>
+            <TableColumn fx:id="ownedQuantityCol"
+                         text="Antal aktier" prefWidth="120"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="8">
+        <Label text="Antal:"/>
+        <TextField fx:id="sellQuantityField" prefWidth="55" promptText="1"/>
+        <Button text="Sælg valgt"
+                onAction="#sellStock"
+                style="-fx-background-color: #D85A30; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Label text="Transaktionshistorik:"
+           style="-fx-text-fill: gray;"/>
+
+    <TableView fx:id="transactionTable" prefHeight="150">
+        <columns>
+            <TableColumn fx:id="txTypeCol"     text="Type"   prefWidth="60"/>
+            <TableColumn fx:id="txSymbolCol"   text="Symbol" prefWidth="80"/>
+            <TableColumn fx:id="txQuantityCol" text="Antal"  prefWidth="60"/>
+            <TableColumn fx:id="txTotalCol"    text="Total"  prefWidth="90"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="messageLabel" text=""
+           style="-fx-text-fill: gray; -fx-font-size: 12px;"/>
+
+</VBox>
