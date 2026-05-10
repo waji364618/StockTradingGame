@@ -1,5 +1,8 @@
 package stockgame.presentation.core;
 
+import stockgame.adapters.AlertBoxAdapter;
+import stockgame.business.feestrategies.FeeStrategy;
+import stockgame.business.feestrategies.PercentageFeeStrategy;
 import stockgame.business.stockmarket.services.StockAlertService;
 import stockgame.business.stockmarket.services.StockBankruptService;
 import stockgame.business.stockmarket.services.StockListenerService;
@@ -27,9 +30,11 @@ public class ApplicationContext {
         this.uow = new FileUnitOfWork("data");
 
         // services
-        this.tradingService = new TradingService(this.uow);
+        FeeStrategy feeStrategy = new PercentageFeeStrategy();
+
+        this.tradingService = new TradingService(this.uow, feeStrategy);
         this.stockListenerService = new StockListenerService(this.uow);
-        this.notificationManager = new AlertNotificationManager();
+        this.notificationManager = new AlertBoxAdapter();
         this.bankruptService = new StockBankruptService(this.uow);
         this.alertService = new StockAlertService();
 

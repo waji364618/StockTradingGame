@@ -1,5 +1,6 @@
 package unit;
 
+import stockgame.business.feestrategies.PercentageFeeStrategy;
 import stockgame.business.stockmarket.services.TradingService;
 import stockgame.domain.OwnedStock;
 import stockgame.domain.Portfolio;
@@ -14,7 +15,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 100, "Steady"));
 
@@ -33,7 +34,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 100, "Steady"));
 
@@ -47,7 +48,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 100, "Steady"));
 
@@ -63,7 +64,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getPortfolios().add(new Portfolio(1, 1000));
 
@@ -75,7 +76,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 100, "Steady"));
 
@@ -95,7 +96,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 100, "Steady"));
 
@@ -113,7 +114,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 0, "Bankrupt"));
 
@@ -127,7 +128,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 100, "Steady"));
 
@@ -142,7 +143,7 @@ public class TradingServiceBuyTest {
 
         // Arrange
         MockUnitOfWork uow = new MockUnitOfWork();
-        TradingService service = new TradingService(uow);
+        TradingService service = new TradingService(uow, new PercentageFeeStrategy());
 
         uow.getStocks().add(new Stock("AAPL", "Apple", 100, "Steady"));
 

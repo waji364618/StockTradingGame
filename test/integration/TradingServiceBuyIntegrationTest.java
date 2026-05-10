@@ -3,6 +3,7 @@ package integration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import stockgame.business.feestrategies.PercentageFeeStrategy;
 import stockgame.business.stockmarket.services.TradingService;
 import stockgame.domain.Portfolio;
 import stockgame.domain.Stock;
@@ -30,7 +31,7 @@ public class TradingServiceBuyIntegrationTest {
 
         uow = new FileUnitOfWork(testDirPath);
 
-        tradingService = new TradingService(uow);
+        tradingService = new TradingService(uow, new PercentageFeeStrategy());
 
         // ryd data
         uow.beginTransaction();

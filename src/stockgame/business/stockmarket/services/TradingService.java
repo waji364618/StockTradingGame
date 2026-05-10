@@ -1,12 +1,13 @@
 package stockgame.business.stockmarket.services;
 
+import stockgame.adapters.FileLoggerAdapter;
+import stockgame.business.feestrategies.FeeStrategy;
 import stockgame.domain.OwnedStock;
 import stockgame.domain.Portfolio;
 import stockgame.domain.Stock;
 import stockgame.domain.Transaction;
 import stockgame.persistence.fileimplementation.*;
 import stockgame.shared.configuration.AppConfig;
-import stockgame.shared.logging.Logger;
 
 import java.util.List;
 
@@ -17,14 +18,16 @@ public class TradingService {
     private final FileOwnedStockDao ownedStockDao;
     private final FilePortfolioDao portfolioDao;
     private final FileTransactionDao transactionDao;
-    private final Logger logger = Logger.getInstance();
+    private final FileLoggerAdapter logger = new FileLoggerAdapter();
+    private final FeeStrategy feeStrategy;
 
-    public TradingService(FileUnitOfWork uow) {
+    public TradingService(FileUnitOfWork uow, FeeStrategy feeStrategy) {
         this.uow = uow;
         this.stockDao = new FileStockDao(uow);
         this.ownedStockDao = new FileOwnedStockDao(uow);
         this.portfolioDao = new FilePortfolioDao(uow);
         this.transactionDao = new FileTransactionDao(uow);
+        this.feeStrategy = feeStrategy;
     }
 
     public void buyStock(String symbol, int quantity) {
@@ -53,7 +56,7 @@ public class TradingService {
 
             // beregn pris
             double price = stock.getCurrentPrice();
-            double fee = price * quantity * AppConfig.getInstance().getTransactionFee();
+            double fee = feeStrategy.calculateFee(price, quantity);
             double total = (price * quantity) + fee;
 
             if (portfolio.getCurrentBalance() < total) {
@@ -131,7 +134,7 @@ public class TradingService {
 
             // beregn penge
             double price = stock.getCurrentPrice();
-            double fee = price * quantity * AppConfig.getInstance().getTransactionFee();
+            double fee = feeStrategy.calculateFee(price, quantity);
             double total = (price * quantity) - fee;
 
             // opdater shares
